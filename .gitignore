@@ -34,3 +34,23 @@
 # Ignore node_modules folder
 /node_modules/*
 /Dockerfile
+
+# Ignore various configuration files and dependencies
+.browserslistrc
+.dockerignore
+.gitattributes
+.gitignore
+.rubocop.yml
+.ruby-version
+Dockerfile
+Gemfile
+Gemfile.lock
+Rakefile
+babel.config.js
+config.ru
+docker-compose.yml
+package-lock.json
+postcss.config.js
+tailwind.config.js
+webpack.config.js
+yarn.lock

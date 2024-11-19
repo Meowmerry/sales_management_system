@@ -1,24 +1,19 @@
 module.exports = function (api) {
-  var validEnv = ['development', 'test', 'production'];
-  var currentEnv = api.env();
-  var isDevelopmentEnv = api.env('development');
-  var isProductionEnv = api.env('production');
-  var isTestEnv = api.env('test');
+  const validEnv = ['development', 'test', 'production'];
+  const currentEnv = api.env();
+  const isDevelopmentEnv = api.env('development');
+  const isProductionEnv = api.env('production');
+  const isTestEnv = api.env('test');
 
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
-      'Please specify a valid `NODE_ENV` or ' +
-      '`BABEL_ENV` environment variables. Valid values are "development", ' +
-      '"test", and "production". Instead, received: ' +
-      JSON.stringify(currentEnv) +
-      '.'
+      `Please specify a valid NODE_ENV or BABEL_ENV environment variables. Valid values are "development", "test", and "production". Instead, received: ${ JSON.stringify(currentEnv) }.`
     );
   }
 
   return {
     presets: [
-      '@babel/preset-react',
-      '@babel/preset-typescript',
+      ['@babel/preset-react', { runtime: 'automatic' }],
       [
         '@babel/preset-env',
         {
@@ -27,9 +22,9 @@ module.exports = function (api) {
           useBuiltIns: 'entry',
           corejs: 3,
           modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
-      ]
+          exclude: ['transform-typeof-symbol'],
+        },
+      ],
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',
@@ -40,11 +35,7 @@ module.exports = function (api) {
       ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
       ['@babel/plugin-proposal-private-methods', { loose: true }],
       ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
-      ['@babel/plugin-transform-runtime', { helpers: false }],
-      ['@babel/plugin-transform-regenerator', { async: false }],
-      ['@babel/plugin-transform-class-properties', { loose: true }],
-      ['@babel/plugin-transform-private-methods', { loose: true }],
-      ['@babel/plugin-transform-private-property-in-object', { loose: true }],
-    ].filter(Boolean)
+      ['@babel/plugin-transform-runtime', { corejs: 3 }],
+    ].filter(Boolean),
   };
 };

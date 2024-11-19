@@ -6,17 +6,39 @@ services:
     volumes:
       - "postgres_data:/var/lib/postgresql/data"
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: meowmerry03
+      POSTGRES_USER: postgres
+      POSTGRES_DB: sales_management_system_development
 
-  web:
+  app:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
-      - ".:/sales-management-system"
+      - ".:/app"
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Expose Rails backend on port 3000
     depends_on:
       - db
+    environment:
+      DATABASE_URL: postgres://postgres:meowmerry03@db/sales_management_system_development
+    networks:
+      - sales_network
+
+  # Optional: Add a separate service for the React frontend (if running it independently)
+  frontend:
+    build: .
+    command: bash -c "cd frontend && npm start"
+    volumes:
+      - ".:/app"
+    ports:
+      - "8080:3000"  # Expose React app on port 3001 (React runs on port 3000 by default)
+    depends_on:
+      - app
+    networks:
+      - sales_network
 
 volumes:
   postgres_data:
+
+networks:
+  sales_network:
+    driver: bridge

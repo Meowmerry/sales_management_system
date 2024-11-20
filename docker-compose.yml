@@ -1,38 +1,46 @@
-version: "3.8"
+version: '3.8'
 
 services:
   db:
     image: postgres:13
-    volumes:
-      - "postgres_data:/var/lib/postgresql/data"
     environment:
-      POSTGRES_PASSWORD: meowmerry03
       POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: sales_management_system_development
-
-  app:
-    build: .
     volumes:
-      - ".:/app"
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "3000:3000"  # Expose Rails backend on port 3000
+      - '5432:5432'
+
+  rails:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+    ports:
+      - '3000:3000' # Expose Rails backend on port 3000
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:meowmerry03@db/sales_management_system_development
+      DATABASE_URL: postgres://postgres:password@db/sales_management_system_development
+    command: ['rails', 'server', '-b', '0.0.0.0']
     networks:
       - sales_network
 
   # Optional: Add a separate service for the React frontend (if running it independently)
   frontend:
-    build: .
-    command: bash -c "cd frontend && npm start"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    # command: bash -c "cd frontend && npm start"
     volumes:
-      - ".:/app"
+      - ./frontend:/app
+      - ./frontend/node_modules:/app/node_modules
     ports:
-      - "8080:3000"  # Expose React app on port 3001 (React runs on port 3000 by default)
+      - '5000:5000' # Expose React app on port 3001 (React runs on port 3000 by default)
     depends_on:
-      - app
+      - rails
     networks:
       - sales_network
 

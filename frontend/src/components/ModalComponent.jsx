@@ -3,7 +3,6 @@ import ModalCreateProduct from './modal/CreateProductForm';
 import ModalUpdateProduct from './modal/UpdateProductForm';
 import ModalDeleteProduct from './modal/DeleteProduct';
 
-
 const ModalComponent = ({
   isModalOpen,
   selectedProduct,
@@ -57,7 +56,7 @@ const ModalComponent = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div className='fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50'>
       {renderContent()}
     </div>
   );

@@ -67,6 +67,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    base64 (0.2.0)
+    bigdecimal (3.1.8)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     brakeman (6.2.2)
@@ -94,8 +96,9 @@ GEM
     marcel (1.0.4)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     msgpack (1.7.5)
+    mutex_m (0.3.0)
     net-imap (0.5.1)
       date
       net-protocol
@@ -164,22 +167,11 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.36.1)
       parser (>= 3.3.1.0)
-    rubocop-minitest (0.36.0)
-      rubocop (>= 1.61, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-performance (1.23.0)
-      rubocop (>= 1.48.1, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rails (2.27.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails-omakase (1.0.0)
-      rubocop
-      rubocop-minitest
-      rubocop-performance
-      rubocop-rails
     ruby-progressbar (1.13.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -193,6 +185,8 @@ GEM
     timeout (0.4.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2024.2)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.6.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -203,16 +197,20 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  base64
+  bigdecimal
   bootsnap
   brakeman
   byebug
+  mutex_m
   pg (~> 1.2)
   puma (>= 5.0)
   rack-cors
   rails (~> 7.0.0)
-  rubocop-rails-omakase
+  rubocop-rails
   sprockets-rails
   sqlite3 (~> 1.4)
+  tzinfo-data
 
 BUNDLED WITH
    2.5.23

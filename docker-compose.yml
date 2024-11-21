@@ -5,7 +5,7 @@ services:
     image: postgres:13
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: meowmerry03
       POSTGRES_DB: sales_management_system_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db/sales_management_system_development
+      DATABASE_URL: postgres://postgres:meowmerry03@db/sales_management_system_development
     command: ['rails', 'server', '-b', '0.0.0.0']
     networks:
       - sales_network

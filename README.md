@@ -38,3 +38,6 @@ sales-management-system/
 │   ├── package.json               # Project dependencies and scripts
 ├── webpack.config.js              # Webpack configuration
 
+- run build docker
+  `docker-compose down` 
+  `docker-compose down` 

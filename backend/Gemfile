@@ -25,12 +25,10 @@ gem "bootsnap", require: false
 
 # Debugging and development tools
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "byebug", group: :development  # Optional debugging tool
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
 end
 
 # Optionally add for production logging and asset handling
-group :production do
-  gem "rails_12factor"
-end
+# gem "rails_12factor"  # No longer needed in Rails 7.x

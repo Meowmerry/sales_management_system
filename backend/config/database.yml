@@ -5,23 +5,23 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_development
+  database: sales_managment_system_development
   username: postgres
-  password: password
-  host: db
+  password: meowmerry03
+  host: 127.0.0.1
   port: 5432
 
 test:
   <<: *default
-  database: myapp_test
+  database: sales_managment_system_test
   username: postgres
-  password: password
-  host: db
+  password: meowmerry03
+  host: 127.0.0.1  # Update this line to point to localhost
   port: 5432
 
 production:
   <<: *default
-  database: myapp_production
+  database: sales_managment_system_production
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>

@@ -21,3 +21,4 @@ EXPOSE 3000
 
 # Run the Rails server in development mode
 CMD ["rails", "server", "-b", "0.0.0.0"]
+

@@ -6,15 +6,19 @@ services:
     dockerContext: ./backend
     envVars:
       - key: DATABASE_URL
-        value: postgresql://sales_management_production_user:GbOqsglxKoWqxW4bxDMUDjhbLMqX1nAE@dpg-ct0g7056l47c73b4qn20-a/sales_management_production
+        fromDatabase:
+          name: sales_management_db
+          property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
       - key: RAILS_ENV
         value: production
-      - key: PORT
-        value: 3000
-      - key: DATABASE_PASSWORD
-        value: GbOqsglxKoWqxW4bxDMUDjhbLMqX1nAE
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: RAILS_SERVE_STATIC_FILES
+        value: "true"
+    healthCheckPath: /
+    autoDeploy: true
 
   - type: web
     name: sales-management-frontend
@@ -24,13 +28,11 @@ services:
     envVars:
       - key: VITE_API_URL
         value: https://sales-management-backend.onrender.com
-      - key: PORT
-        value: 3000
       - key: NODE_ENV
         value: production
+    autoDeploy: true
 
 databases:
   - name: sales_management_db
     databaseName: sales_management_production
-    user: sales_management_production_user
     plan: free

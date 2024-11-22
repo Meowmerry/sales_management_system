@@ -21,9 +21,8 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  database: sales_management_production
-  pool: 5
   url: <%= ENV['DATABASE_URL'] %>
+  database: sales_management_production
   sslmode: require
+  prepare_statements: false
+  advisory_locks: false

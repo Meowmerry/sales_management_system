@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "3.3.6"
 
 # Specify the Rails version
 gem "rails", "~> 7.0.0"
@@ -6,34 +7,35 @@ gem "rails", "~> 7.0.0"
 # Use Puma web server
 gem "puma", ">= 5.0"
 
-# Use PostgreSQL for production
-group :production do
-  gem "pg", "~> 1.2"
-end
+# Database
+gem "pg", "~> 1.2"
 
-# Use SQLite for development and test
-group :development, :test do
-  gem "sqlite3", "~> 1.4"
-  gem "sprockets-rails"
-end
-
-# Rack CORS for handling Cross-Origin Resource Sharing
-gem "rack-cors"
-
-# Reduce boot times through caching
+# Performance and caching
 gem "bootsnap", require: false
 
-# Debugging and development tools
-group :development, :test do
-  gem "byebug" # Debugging tool
-  gem "brakeman", require: false # Security analysis
-  gem "rubocop-rails", require: false # Linting tool
+# API and CORS
+gem "rack-cors"
+
+# Assets and frontend
+gem "sprockets-rails"
+gem "importmap-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+
+# System dependencies
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "mutex_m"
+gem "base64"
+gem "bigdecimal"
+
+# Production specific gems
+group :production do
+  gem 'redis', '~> 4.0'
 end
 
-# Comment on `rails_12factor`:
-# This is no longer needed in Rails 7.x because Rails manages logging and static assets out of the box.
-
-gem 'mutex_m'
-gem 'base64'
-gem 'bigdecimal'
-gem 'tzinfo-data'
+# Development and test gems
+group :development, :test do
+  gem "byebug"
+  gem "brakeman", require: false
+  gem "rubocop-rails", require: false
+end

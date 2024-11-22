@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-slim
+FROM ruby:3.3.6-slim
 
 # Install essential packages and dependencies
 RUN apt-get update -qq && \
@@ -15,15 +15,24 @@ RUN apt-get update -qq && \
 # Set working directory
 WORKDIR /app
 
-# Install Rails dependencies
+# Install specific bundler version
+RUN gem update --system && \
+    gem install bundler
+
+# Copy gemfiles
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs 4 --retry 3
+
+# Configure bundler
+RUN bundle config set --local deployment 'true' && \
+    bundle config set --local without 'development test' && \
+    bundle config set force_ruby_platform true && \
+    bundle install --jobs 4 --retry 3
 
 # Copy application code
 COPY . .
 
 # Precompile assets
-RUN SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
+RUN SECRET_KEY_BASE=dummy RAILS_ENV=production bundle exec rake assets:precompile
 
 # Add SSL certificates
 RUN update-ca-certificates

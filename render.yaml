@@ -17,6 +17,8 @@ services:
         value: "true"
       - key: RAILS_SERVE_STATIC_FILES
         value: "true"
+      - key: POSTGRES_SSLMODE
+        value: "require"
     healthCheckPath: /
     autoDeploy: true
 
@@ -36,3 +38,4 @@ databases:
   - name: sales_management_db
     databaseName: sales_management_production
     plan: free
+    ipAllowList: []

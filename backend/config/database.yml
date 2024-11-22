@@ -21,9 +21,9 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  adapter: postgresql
+  encoding: unicode
   database: sales_management_production
-  username: sales_management_production_user
-  password: <%= ENV['DATABASE_PASSWORD'] || 'GbOqsglxKoWqxW4bxDMUDjhbLMqX1nAE' %>
-  host: dpg-ct0g7056l47c73b4qn20-a
-  port: 5432
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+  sslmode: require

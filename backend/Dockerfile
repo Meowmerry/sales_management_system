@@ -8,7 +8,9 @@ RUN apt-get update -qq && \
     nodejs \
     npm \
     git \
-    curl
+    curl \
+    postgresql-client \
+    ca-certificates
 
 # Set working directory
 WORKDIR /app
@@ -22,6 +24,9 @@ COPY . .
 
 # Precompile assets
 RUN SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
+
+# Add SSL certificates
+RUN update-ca-certificates
 
 # Expose port
 EXPOSE 3000

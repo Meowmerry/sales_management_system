@@ -1,24 +1,27 @@
-# Use a lightweight Ruby image as the base
-FROM ruby:3.2
+FROM ruby:3.2.2
 
-# Install dependencies for Rails
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn
+# Install system dependencies
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy Gemfile and Gemfile.lock into the container
+# Install application dependencies
 COPY Gemfile Gemfile.lock ./
+RUN bundle install --jobs 4
 
-# Install Ruby dependencies
-RUN bundle install
-
-# Copy the rest of the application code into the container
+# Copy application code
 COPY . .
 
-# Expose port 3000
+# Remove existing credentials and generate new ones
+RUN rm -f config/credentials.yml.enc config/master.key && \
+    bundle exec rails credentials:edit
+
+# Add a script to be executed every time the container starts
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+# Configure the main process to run when running the image
 EXPOSE 3000
-
-# Run the Rails server in development mode
 CMD ["rails", "server", "-b", "0.0.0.0"]
-

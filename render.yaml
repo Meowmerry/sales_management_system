@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: sales-management-backend
+    env: ruby
+    buildCommand: bundle install && bundle exec rake db:migrate
+    startCommand: bundle exec rails s
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sales_management_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
+  - type: web
+    name: sales-management-frontend
+    env: node
+    buildCommand: yarn install && yarn build
+    startCommand: yarn preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://sales-management-backend.onrender.com
+
+databases:
+  - name: sales_management_db
+    databaseName: sales_management_production
+    user: sales_management
+    plan: free

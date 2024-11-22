@@ -31,6 +31,10 @@ RUN bundle config set --local deployment 'true' && \
 # Copy application code
 COPY . .
 
+# Create storage directory for Active Storage
+RUN mkdir -p storage tmp/storage && \
+    chmod -R 777 storage tmp/storage
+
 # Precompile assets
 RUN SECRET_KEY_BASE=dummy RAILS_ENV=production bundle exec rake assets:precompile
 

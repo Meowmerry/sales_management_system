@@ -21,9 +21,9 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] %>
-  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
   url: <%= ENV['DATABASE_URL'] %>
+  database: sales_management_production
+  username: sales_management_production_user
+  password: <%= ENV['DATABASE_PASSWORD'] || 'GbOqsglxKoWqxW4bxDMUDjhbLMqX1nAE' %>
+  host: dpg-ct0g7056l47c73b4qn20-a
+  port: 5432

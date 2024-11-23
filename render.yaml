@@ -9,6 +9,22 @@ services:
         fromDatabase:
           name: sales_management_db
           property: connectionString
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: sales_management_db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: sales_management_db
+          property: password
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: sales_management_db
+          property: database
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: sales_management_db
+          property: host
       - key: RAILS_MASTER_KEY
         value: 37688b56bde617604ad1c986cf06fa1e
       - key: RAILS_ENV

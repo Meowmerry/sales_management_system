@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Order from '../../../backbone/models/order'; // Import the Backbone model
+import Order from '../../../backbone/models/order'; 
 
 const OrderForm = () => {
   const [productId, setProductId] = useState('');
@@ -17,7 +17,7 @@ const OrderForm = () => {
       success: (model, response) => {
         console.log('Order successfully placed:', response);
         setMessage('Order successfully placed!');
-        setProductId(''); // Clear form fields
+        setProductId('');
         setQuantity('');
       },
       error: (model, response) => {

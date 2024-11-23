@@ -10,6 +10,7 @@ const TableProductInventory = ({}) => {
         action, selectedProduct, handleCreateProduct,
         openModalUpdate, openModalDelete, openModalCreateProduct, closeModal, handleUpdate, setSelectedProduct
     } = useProducts();
+    console.log({products})
 
     return (
 

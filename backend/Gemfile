@@ -1,8 +1,8 @@
 source "https://rubygems.org"
-ruby "3.3.6"
+ruby "3.3.0"
 
 # Specify the Rails version
-gem "rails", "~> 7.0.0"
+gem "rails", "~> 7.0.8"
 
 # Use Puma web server
 gem "puma", ">= 5.0"
@@ -16,26 +16,10 @@ gem "bootsnap", require: false
 # API and CORS
 gem "rack-cors"
 
-# Assets and frontend
-gem "sprockets-rails"
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-
 # System dependencies
-gem "tzinfo-data"
-gem "mutex_m"
-gem "base64"
-gem "bigdecimal"
-
-# Production specific gems
-group :production do
-  gem 'redis', '~> 4.0'
-end
+gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Development and test gems
 group :development, :test do
-  gem "byebug"
-  gem "brakeman", require: false
-  gem "rubocop-rails", require: false
+  gem "debug", platforms: %i[ mri windows ]
 end

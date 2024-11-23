@@ -10,21 +10,13 @@ services:
           name: sales_management_db
           property: connectionString
       - key: POSTGRES_USER
-        fromDatabase:
-          name: sales_management_db
-          property: user
+        value: sales_management_production_user
       - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: sales_management_db
-          property: password
+        value: 6UnApgnwTZUv1bSg418kqjHwtQREbiL5
       - key: POSTGRES_DB
-        fromDatabase:
-          name: sales_management_db
-          property: database
+        value: sales_management_production_7i1o
       - key: POSTGRES_HOST
-        fromDatabase:
-          name: sales_management_db
-          property: host
+        value: dpg-ct0igs9u0jms73c5onng-a
       - key: RAILS_MASTER_KEY
         value: 37688b56bde617604ad1c986cf06fa1e
       - key: RAILS_ENV
@@ -34,7 +26,7 @@ services:
       - key: RAILS_SERVE_STATIC_FILES
         value: "true"
       - key: POSTGRES_SSLMODE
-        value: "require"
+        value: "disable"
     healthCheckPath: /
     autoDeploy: true
 
@@ -52,7 +44,7 @@ services:
 
 databases:
   - name: sales_management_db
-    databaseName: sales_management_production
+    databaseName: sales_management_production_7i1o
     user: sales_management_production_user
     plan: free
     ipAllowList: []

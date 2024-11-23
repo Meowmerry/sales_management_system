@@ -1,48 +1,33 @@
-FROM ruby:3.3.6-slim
+FROM ruby:3.3.0-slim
 
-# Install essential packages and dependencies
+# Install system dependencies
 RUN apt-get update -qq && \
-    apt-get install -y \
-    build-essential \
-    libpq-dev \
-    nodejs \
-    npm \
-    git \
-    curl \
-    postgresql-client \
-    ca-certificates
+    apt-get install -y build-essential libpq-dev nodejs npm git curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
 
-# Set working directory
+# Install yarn
+RUN npm install -g yarn
+
+# Create app directory
 WORKDIR /app
 
-# Install specific bundler version
-RUN gem update --system && \
-    gem install bundler
-
-# Copy gemfiles
+# Install application gems
 COPY Gemfile Gemfile.lock ./
-
-# Configure bundler
-RUN bundle config set --local deployment 'true' && \
-    bundle config set --local without 'development test' && \
-    bundle config set force_ruby_platform true && \
-    bundle install --jobs 4 --retry 3
+RUN bundle config set force_ruby_platform true && \
+    bundle install
 
 # Copy application code
 COPY . .
 
-# Create storage directory for Active Storage
-RUN mkdir -p storage tmp/storage && \
-    chmod -R 777 storage tmp/storage
-
 # Precompile assets
-RUN SECRET_KEY_BASE=dummy RAILS_ENV=production bundle exec rake assets:precompile
+RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
 
-# Add SSL certificates
-RUN update-ca-certificates
+# Add a script to be executed every time the container starts
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 
-# Expose port
+# Configure the main process to run when running the image
 EXPOSE 3000
-
-# Start the server
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0"]

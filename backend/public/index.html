@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management System API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .endpoint {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .endpoint h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sales Management System API</h1>
+    
+    <p>Welcome to the Sales Management System API. Below are the available endpoints:</p>
+    
+    <div class="endpoint">
+        <h3>Products</h3>
+        <p>Manage product inventory:</p>
+        <ul>
+            <li><code>GET /api/v1/products</code> - List all products</li>
+            <li><code>GET /api/v1/products/:id</code> - Get product details</li>
+            <li><code>POST /api/v1/products</code> - Create a new product</li>
+            <li><code>PUT /api/v1/products/:id</code> - Update a product</li>
+            <li><code>DELETE /api/v1/products/:id</code> - Delete a product</li>
+        </ul>
+    </div>
+
+    <div class="endpoint">
+        <h3>Orders</h3>
+        <p>Manage sales orders:</p>
+        <ul>
+            <li><code>GET /api/v1/orders</code> - List all orders</li>
+            <li><code>GET /api/v1/orders/:id</code> - Get order details</li>
+            <li><code>POST /api/v1/orders</code> - Create a new order</li>
+            <li><code>PUT /api/v1/orders/:id</code> - Update an order</li>
+            <li><code>DELETE /api/v1/orders/:id</code> - Delete an order</li>
+        </ul>
+    </div>
+
+    <p>For more information, please refer to the API documentation or contact support.</p>
+</body>
+</html>

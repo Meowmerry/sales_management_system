@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # Root path
+  root 'home#index'
+
+  # API routes
   namespace :api do
     namespace :v1 do
       resources :products, only: [:index, :show, :create, :update, :destroy]
@@ -6,4 +10,3 @@ Rails.application.routes.draw do
     end
   end
 end
-

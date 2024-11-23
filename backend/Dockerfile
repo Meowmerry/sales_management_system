@@ -2,9 +2,12 @@ FROM ruby:3.3.0-slim
 
 # Install system dependencies
 RUN apt-get update -qq && \
-    apt-get install -y build-essential libpq-dev nodejs npm git curl && \
+    apt-get install -y build-essential libpq-dev nodejs npm git curl ca-certificates && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
+
+# Update SSL certificates
+RUN update-ca-certificates
 
 # Install yarn
 RUN npm install -g yarn
@@ -19,6 +22,10 @@ RUN bundle config set force_ruby_platform true && \
 
 # Copy application code
 COPY . .
+
+# Create storage directories
+RUN mkdir -p storage tmp/storage tmp/pids && \
+    chmod -R 777 storage tmp/storage tmp/pids
 
 # Precompile assets
 RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile

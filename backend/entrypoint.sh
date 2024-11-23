@@ -9,7 +9,7 @@ chmod -R 777 /app/storage /app/tmp/storage
 rm -f /app/tmp/pids/server.pid
 
 # Wait for database to be ready
-until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c '\q' 2>/dev/null; do
+until PGPASSWORD=$POSTGRES_PASSWORD PGSSLMODE=verify-full PGSSLCERT=/etc/ssl/certs/ca-certificates.crt psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c '\q' 2>/dev/null; do
   echo "Postgres is unavailable - sleeping"
   sleep 1
 done

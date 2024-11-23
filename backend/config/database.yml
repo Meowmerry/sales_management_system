@@ -22,6 +22,7 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  sslmode: require
+  sslmode: verify-full
+  sslcert: /etc/ssl/certs/ca-certificates.crt
   prepare_statements: false
   advisory_locks: false

@@ -7,7 +7,7 @@ module.exports = function (api) {
 
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
-      `Please specify a valid NODE_ENV or BABEL_ENV environment variables. Valid values are "development", "test", and "production". Instead, received: ${JSON.stringify(currentEnv)}.`
+      `Please specify a valid NODE_ENV or BABEL_ENV environment variables. Valid values are "development", "test", and "production". Instead, received: ${ JSON.stringify(currentEnv) }.`
     );
   }
 
@@ -39,3 +39,7 @@ module.exports = function (api) {
     ].filter(Boolean),
   };
 };
+
+
+// postgresql://sales_management_production_user:6UnApgnwTZUv1bSg418kqjHwtQREbiL5@dpg-ct0igs9u0jms73c5onng-a/sales_management_production_7i1o
+// postgresql://sales_management_production_user:6UnApgnwTZUv1bSg418kqjHwtQREbiL5@dpg-ct0igs9u0jms73c5onng-a.oregon-postgres.render.com/sales_management_production_7i1o

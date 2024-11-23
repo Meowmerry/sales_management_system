@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   
-  protect_from_forgery with: :null_session
-  
   rescue_from StandardError, with: :handle_error
   rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
   

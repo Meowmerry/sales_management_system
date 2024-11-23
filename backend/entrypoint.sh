@@ -8,12 +8,8 @@ chmod -R 777 /app/storage /app/tmp/storage
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /app/tmp/pids/server.pid
 
-# Create PostgreSQL directory for root certificate
-mkdir -p /opt/render/.postgresql
-chmod 700 /opt/render/.postgresql
-
 # Wait for database to be ready
-until PGPASSWORD=$POSTGRES_PASSWORD PGSSLMODE=verify-full PGSSLCERT=/opt/render/.postgresql/root.crt psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c '\q' 2>/dev/null; do
+until PGPASSWORD=$POSTGRES_PASSWORD PGSSLMODE=verify-full psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c '\q' 2>/dev/null; do
   echo "Postgres is unavailable - sleeping"
   sleep 1
 done

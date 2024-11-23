@@ -23,6 +23,6 @@ production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   sslmode: verify-full
-  sslcert: /opt/render/.postgresql/root.crt
+  sslrootcert: system
   prepare_statements: false
   advisory_locks: false

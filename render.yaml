@@ -6,7 +6,9 @@ services:
     dockerContext: ./backend
     envVars:
       - key: DATABASE_URL
-        value: postgres://sales_management_production_user:GbOqsglxKoWqxW4bxDMUDjhbLMqX1nAE@dpg-ct0gbh8gph6c739llfb0-a.oregon-postgres.render.com/sales_management_production
+        fromDatabase:
+          name: sales_management_db
+          property: connectionString
       - key: RAILS_MASTER_KEY
         value: 37688b56bde617604ad1c986cf06fa1e
       - key: RAILS_ENV

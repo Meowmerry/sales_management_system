@@ -222,7 +222,7 @@ DEPENDENCIES
   byebug
   importmap-rails
   mutex_m
-  pg (~> 1.2)
+  pg (~> 1.1)
   puma (>= 5.0)
   rack-cors
   rails (~> 7.0.0)

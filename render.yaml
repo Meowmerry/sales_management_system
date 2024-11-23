@@ -6,9 +6,7 @@ services:
     dockerContext: ./backend
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: sales_management_db
-          property: connectionString
+        value: postgresql://sales_management_production_user:6UnApgnwTZUv1bSg418kqjHwtQREbiL5@dpg-ct0igs9u0jms73c5onng-a.oregon-postgres.render.com/sales_management_production_7i1o
       - key: POSTGRES_USER
         value: sales_management_production_user
       - key: POSTGRES_PASSWORD
@@ -16,7 +14,7 @@ services:
       - key: POSTGRES_DB
         value: sales_management_production_7i1o
       - key: POSTGRES_HOST
-        value: dpg-ct0igs9u0jms73c5onng-a
+        value: dpg-ct0igs9u0jms73c5onng-a.oregon-postgres.render.com
       - key: RAILS_MASTER_KEY
         value: 37688b56bde617604ad1c986cf06fa1e
       - key: RAILS_ENV

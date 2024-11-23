@@ -21,6 +21,9 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] || "postgresql://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}.oregon-postgres.render.com/#{ENV['POSTGRES_DB']}" %>
+  url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
   sslmode: disable
-  pool: 5

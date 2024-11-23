@@ -22,7 +22,6 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  sslmode: verify-full
-  sslrootcert: system
+  sslmode: disable
   prepare_statements: false
   advisory_locks: false

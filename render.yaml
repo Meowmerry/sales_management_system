@@ -8,10 +8,9 @@ services:
   - type: web
     name: sales-management-backend
     runtime: ruby
-    plan: free
-    buildCommand: "./bin/render-build.sh"
-    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec rails server"
+    rootDir: backend
+    buildCommand: bundle install
+    startCommand: bundle exec rails server -p $PORT -b 0.0.0.0
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -19,5 +18,12 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
       - key: WEB_CONCURRENCY
-        value: 2 # sensible default
+        value: 2
+    healthCheckPath: /health

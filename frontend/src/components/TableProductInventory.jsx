@@ -20,8 +20,7 @@ const TableProductInventory = ({}) => {
                     className="text-blue-500 hover:text-blue-700 m-4 border-[1px] border-blue-500 pr-1 pl-1 rounded-[4px] disabled:opacity-50 disabled:cursor-not-allowed">Create New Product</button>
             </div>
             <div className="container mx-auto p-4">
-                <h1 className="text-3xl font-bold mb-6 text-center">Inventory Dashboard</h1>
-
+              
                 <div className="overflow-x-auto shadow-md sm:rounded-lg">
                     {tableLoading ? (
                         <LoadingSpinner />

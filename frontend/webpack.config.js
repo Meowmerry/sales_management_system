@@ -1,5 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+// Determine which environment we're in
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+// Define API URL based on environment
+const API_URL = isDevelopment 
+    ? 'http://localhost:3000/api/v1/products'
+    : 'https://sales-management-backend-nq4p.onrender.com/api/v1/products';
 
 module.exports = {
     entry: './src/index.js',
@@ -39,6 +48,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './public/index.html'),
+        }),
+        new webpack.DefinePlugin({
+            'API_URL': JSON.stringify(API_URL)
         }),
     ],
     devServer: {

@@ -1,28 +1,51 @@
-import React from 'react';
+import React, { act } from 'react';
 
-const CreateProductForm = ({
+const CreateUpdateproductForm = ({
   closeModal,
   loading,
   successMessage,
-  errors,
+  errors,handleUpdateProduct ,
   handleCreateProduct,
   isSubmitting,
   selectedProduct,
   setSelectedProduct,
+  action,
 }) => {
+  const textHeader = action === 'update' ?  'Update Product' : action === 'create' ? 'Create New Product'
+  :''  
+  const buttunSubmit = action === 'update' ?  'Update Product' : action === 'create' ? 'Create Product'
+  :''  
+  const submitTextLoading = action === 'update' ?  'Updating...' : action === 'create' ? 'Creating...'
+  :''  
 
-  const handleChange = (e) => {
+  const handleChangeCreateProduct = (e) => {
     const { name, value } = e.target;
     setSelectedProduct({
       ...selectedProduct,
       [name]: value,
     });
   };
+ console.log({action})
 
+ const handleChangeUpdateProduct = (e) => {
+  const {name, value} = e.target;
+
+  setSelectedProduct((prevProduct) => {
+    if (!prevProduct) {
+      return null;
+    }
+
+    return {
+      ...prevProduct,
+      [name]: name === 'price' || name === 'quantity_in_stock' ? +value : value,
+      id: prevProduct.id || '',
+    };
+  });
+};
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Create New Product</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">{textHeader}</h2>
 
       {successMessage && (
         <div className="bg-green-100 text-green-800 p-3 rounded mb-4">
@@ -40,7 +63,7 @@ const CreateProductForm = ({
         </div>
       )}
 
-      <form onSubmit={handleCreateProduct}>
+      <form onSubmit={action === 'update' ? handleUpdateProduct : handleCreateProduct}>
         <div className="mb-4">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Product Name
@@ -50,7 +73,7 @@ const CreateProductForm = ({
             id="name"
             name="name"
             value={selectedProduct?.name || ''}
-            onChange={handleChange}
+            onChange={action === 'update' ? handleChangeUpdateProduct : handleChangeCreateProduct}
             required
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
           />
@@ -64,10 +87,11 @@ const CreateProductForm = ({
             type="number"
             id="price"
             name="price"
+            min={0}
+            max={100000000}
             value={selectedProduct?.price || ''}
-            onChange={handleChange}
+            onChange={action === 'update' ? handleChangeUpdateProduct : handleChangeCreateProduct}
             required
-            min="0"
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
           />
           {errors?.includes('price') && (
@@ -84,9 +108,10 @@ const CreateProductForm = ({
             id="quantity_in_stock"
             name="quantity_in_stock"
             value={selectedProduct?.quantity_in_stock || ''}
-            onChange={handleChange}
+            onChange={action === 'update' ? handleChangeUpdateProduct : handleChangeCreateProduct}
             required
-            min="0"
+            min={0}
+            max={100000000}
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
           />
           {errors?.includes('quantity_in_stock') && (
@@ -111,7 +136,12 @@ const CreateProductForm = ({
               : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500'
               } min-w-[120px]`}
           >
-            {isSubmitting ? 'Creating...' : 'Create Product'}
+            {isSubmitting ? 
+             <>
+             <LoadingSpinner />
+             <span>{submitTextLoading}</span>
+           </>:
+             buttunSubmit}
           </button>
         </div>
       </form>
@@ -119,4 +149,4 @@ const CreateProductForm = ({
   );
 };
 
-export default CreateProductForm;
+export default CreateUpdateproductForm;

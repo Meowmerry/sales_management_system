@@ -10,6 +10,7 @@ const TableProductInventory = ({}) => {
         action, selectedProduct, handleCreateProduct,
         openModalUpdate, openModalDelete, openModalCreateProduct, closeModal, handleUpdate, setSelectedProduct
     } = useProducts();
+    const formatter = new Intl.NumberFormat('en-US');
 
     return (
 
@@ -42,8 +43,8 @@ const TableProductInventory = ({}) => {
                                     <tr key={product.id} className="border-b hover:bg-gray-50">
                                         <td className="px-4 py-2">{product.id}</td>
                                         <td className="px-4 py-2">{product.name}</td>
-                                        <td className="px-4 py-2">${product.price}</td>
-                                        <td className="px-4 py-2">{product.quantity_in_stock}</td>
+                                        <td className="px-4 py-2">${formatter.format(product.price)}</td>
+                                        <td className="px-4 py-2">{formatter.format(product.quantity_in_stock)}</td>
                                         <td className="px-4 py-2">
                                             <button
                                                 className="text-blue-500 hover:text-blue-700 mr-4 border-[1px] border-blue-500 pr-1 pl-1 w-10 rounded-[4px] disabled:opacity-50 disabled:cursor-not-allowed"

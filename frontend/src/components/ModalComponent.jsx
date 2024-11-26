@@ -1,6 +1,5 @@
 import React from 'react';
-import ModalCreateProduct from './modal/CreateProductForm';
-import ModalUpdateProduct from './modal/UpdateProductForm';
+import CreateUpdateproductForm from './modal/CreateUpdateproductForm';
 import ModalDeleteProduct from './modal/DeleteProduct';
 
 const ModalComponent = ({
@@ -22,11 +21,12 @@ const ModalComponent = ({
   const renderContent = () => {
     if (action === 'create') {
       return (
-        <ModalCreateProduct
+        <CreateUpdateproductForm
           closeModal={closeModal}
           loading={loading}
           successMessage={successMessage}
           errors={errors}
+          action={action}
           handleCreateProduct={handleCreateProduct}
           isSubmitting={isSubmitting}
           selectedProduct={selectedProduct}
@@ -35,13 +35,17 @@ const ModalComponent = ({
       );
     } else if (action === 'update') {
       return (
-        <ModalUpdateProduct
-          handleUpdate={handleUpdate}
-          selectedProduct={selectedProduct}
-          setSelectedProduct={setSelectedProduct}
-          loading={loading}
-          closeModal={closeModal}
-        />
+        <CreateUpdateproductForm
+        closeModal={closeModal}
+        loading={loading}
+        action={action}
+        successMessage={successMessage}
+        errors={errors}
+        handleUpdateProduct={handleUpdate}
+        isSubmitting={isSubmitting}
+        selectedProduct={selectedProduct}
+        setSelectedProduct={setSelectedProduct}
+      />
       );
     } else if (action === 'delete') {
       return (

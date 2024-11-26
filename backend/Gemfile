@@ -20,6 +20,9 @@ gem "bootsnap", require: false
 # API and CORS
 gem "rack-cors"
 
+# Message Queue
+gem 'bunny', '~> 2.22'
+
 # System dependencies
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 

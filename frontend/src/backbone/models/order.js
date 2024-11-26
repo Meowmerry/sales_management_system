@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 
-const Orders = Backbone.Model.extend({
+const Order = Backbone.Model.extend({
     urlRoot: '/api/v1/orders',
 });
 
-export default Orders;
+export default Order;

@@ -43,5 +43,8 @@ module SalesManagementSystem
 
     # Time zone configuration
     config.time_zone = 'UTC'
+
+    # Add services directory to autoload paths
+    config.autoload_paths += %W(#{config.root}/app/services)
   end
 end

@@ -10,7 +10,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5434:5432'  # Changed to a different port
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'   # RabbitMQ default port
+      - '15672:15672' # RabbitMQ management interface
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - sales_network
 
   rails:
     build:
@@ -22,8 +34,10 @@ services:
       - '3000:3000' # Expose Rails backend on port 3000
     depends_on:
       - db
+      - rabbitmq
     environment:
       DATABASE_URL: postgres://postgres:meowmerry03@db/sales_management_system_development
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
     command: ['rails', 'server', '-b', '0.0.0.0']
     networks:
       - sales_network
@@ -46,6 +60,7 @@ services:
 
 volumes:
   postgres_data:
+  rabbitmq_data:
 
 networks:
   sales_network:

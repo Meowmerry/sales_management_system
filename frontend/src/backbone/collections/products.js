@@ -3,8 +3,8 @@ import Product from '../models/product';
 
 const Products = Backbone.Collection.extend({
     model: Product,
-    // url: 'http://localhost:3000/api/v1/products',
-    url: 'https://sales-management-backend-nq4p.onrender.com/api/v1/products',
+    url: 'http://localhost:3000/api/v1/products',
+    // url: 'https://sales-management-backend-nq4p.onrender.com/api/v1/products',
 
     parse(response) {
         return response;

@@ -1,43 +1,144 @@
-# README
+# Sales Management System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A comprehensive sales management system built with Ruby on Rails backend and React frontend. This system helps businesses manage their sales operations, inventory, and customer relationships efficiently.
 
-Things you may want to cover:
+![System Architecture](./diagram.jpeg)
 
-* Ruby version
+## Features
 
-* System dependencies
+- User Authentication and Authorization
+- Product Management
+- Inventory Tracking
+- Sales Order Processing
+- Customer Management
+- Reporting and Analytics
+- Real-time Dashboard
 
-* Configuration
+## Tech Stack
 
-* Database creation
+### Frontend
+- React.js
+- Material-UI
+- Redux for state management
+- Axios for API calls
 
-* Database initialization
+### Backend
+- Ruby on Rails
+- PostgreSQL
+- Redis for caching
+- JWT for authentication
 
-* How to run the test suite
+## Prerequisites
 
-* Services (job queues, cache servers, search engines, etc.)
+- Docker and Docker Compose
+- Node.js (v14 or higher)
+- Ruby (v3.0 or higher)
+- PostgreSQL
 
-* Deployment instructions
+## Getting Started
 
-* ...
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd sales-management-system
+```
 
+2. Environment Setup:
+```bash
+cp .env.example .env
+# Configure your environment variables in .env file
+```
+
+3. Start the application using Docker:
+```bash
+# Development environment
+docker-compose up
+
+# Production environment
+docker-compose -f docker-compose.prod.yml up
+```
+
+4. Access the application:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+
+## Project Structure
+
+```
 sales-management-system/
-├── frontend/
-│   ├── node_modules/              # Auto-generated, do not modify
-│   ├── public/
-│   │   └── index.html             # HTML template file
-│   ├── src/
-│   │   ├── components/            # React components
-│   │   ├── hooks/                 # Custom hooks
-│   │   ├── pages/                 # Page components
-│   │   ├── App.js                 # Main React component
-│   │   ├── index.css              # Global styles
-│   │   └── index.js               # Entry point file
-│   ├── package.json               # Project dependencies and scripts
-├── webpack.config.js              # Webpack configuration
+├── frontend/                    # React frontend application
+│   ├── node_modules/           # Dependencies
+│   ├── public/                 # Static files
+│   ├── src/                    # Source code
+│   │   ├── components/        # React components
+│   │   ├── hooks/            # Custom hooks
+│   │   ├── pages/            # Page components
+│   │   ├── App.js            # Main React component
+│   │   ├── index.css         # Global styles
+│   │   └── index.js          # Entry point
+│   └── package.json          # Frontend dependencies and scripts
+│
+├── backend/                    # Rails backend application
+│   ├── app/                   # Application code
+│   ├── config/               # Configuration files
+│   ├── db/                   # Database files
+│   └── Gemfile              # Backend dependencies
+│
+├── docker-compose.yml         # Development Docker configuration
+├── docker-compose.prod.yml    # Production Docker configuration
+└── README.md                 # Project documentation
+```
 
-- run build docker
-  `docker-compose down` 
-  `docker-compose down` 
+## Development
+
+### Running Tests
+```bash
+# Frontend tests
+cd frontend
+npm test
+
+# Backend tests
+cd backend
+rails test
+```
+
+### Code Linting
+```bash
+# Frontend
+cd frontend
+npm run lint
+
+# Backend
+cd backend
+rubocop
+```
+
+## Deployment
+
+The application can be deployed using Docker:
+
+1. Build the production images:
+```bash
+docker-compose -f docker-compose.prod.yml build
+```
+
+2. Start the production containers:
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please contact [your-email] or create an issue in the repository.
